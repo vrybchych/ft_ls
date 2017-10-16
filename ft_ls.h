@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 10:45:03 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/14 14:13:14 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/16 15:09:26 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <limits.h>
-//# include "libft/libft.h"
+# include "libft/libft.h"
+
+typedef	struct		s_e
+{
+	char			*name;
+	struct stat		st;
+	struct s_e		*next;
+}					t_e;
+
+void		add_to_list(t_e **el, struct stat st, char *name);
 
 #endif
