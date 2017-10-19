@@ -6,14 +6,15 @@
 #    By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/14 10:36:49 by vrybchyc          #+#    #+#              #
-#    Updated: 2017/10/16 09:57:01 by vrybchyc         ###   ########.fr        #
+#    Updated: 2017/10/19 17:31:41 by vrybchyc         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = ft_ls
 
 SRC = 	add_to_list.c\
-		main.c
+		main.c\
+		print.c
 
 OBJ = $(SRC:.c=.o)
 

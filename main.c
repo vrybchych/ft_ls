@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 10:47:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/19 13:13:52 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/19 19:08:46 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,21 @@ static void	ft_print(char *dir_name, t_e *el)
 {
 	if (ft_strcmp(".", dir_name))
 	{
-		ft_putchar('\n');
-		ft_putstr(dir_name);
-		ft_putstr(":\n");
+		write(1, "\n", 1);
+		write(1, dir_name, ft_strlen(dir_name));
+		write(1, ":\n", 2);
 	}
 	while (el)
 	{
-		ft_putstr(el->name);
-		ft_putchar('\n');
+		print_type(el->st.st_mode);
+//		print_permission(el->st.st_mode);
+		print_links_nbr(el->st.st_nlink);
+		print_uname(el->st.st_uid);
+		print_gname(el->st.st_gid);
+		ft_print_size(el->st.st_size);
+		print_date(el->st.st_mtimespec.tv_sec);
+		write(1, el->name, ft_strlen(el->name));
+		write(1, "\n", 1);
 		el = el->next;
 	}
 }
@@ -37,7 +44,8 @@ static void	ft_ls(char *dir_name, t_e *el)
 
 	if (!(dir_fd = opendir(dir_name)))
 	{
-        perror("Can't open");
+		write(1, "ft_ls:", 7);
+        perror(dir_name);
         return ;
     }
 	while ((dirp = readdir(dir_fd)))
