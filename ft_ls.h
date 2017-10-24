@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 10:45:03 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/19 19:04:16 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/24 13:18:13 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@
 # include <grp.h>
 # include <time.h>
 
+int					g_link_w;
+int					g_uname_w;
+int					g_gname_w;
+int					g_size_w;
+int					g_flag_R;
+int					g_flag_t;
+int					g_flag_a;
+int					g_flag_l;
+int					g_flag_r;
+
 typedef	struct		s_e
 {
 	char			*name;
@@ -35,12 +45,9 @@ typedef	struct		s_e
 }					t_e;
 
 void		add_to_list(t_e **el, struct stat st, char *name, char *path);
-void		print_gname(gid_t gid);
-void		print_date(time_t t);
-void		print_links_nbr(nlink_t n);
-//void		print_permission(mode_t m);
-void		print_type(mode_t m);
-void		print_uname(uid_t uid);
-void		ft_print_size(off_t size);
+void		print_l(t_e *el);
+void		set_width(struct stat st);
+void		print_nb_width(int nb, int width);
+void		print_str_width(char *str, int width);
 
 #endif

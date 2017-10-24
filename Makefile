@@ -6,7 +6,7 @@
 #    By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/14 10:36:49 by vrybchyc          #+#    #+#              #
-#    Updated: 2017/10/19 17:31:41 by vrybchyc         ###   ########.fr        #
+#    Updated: 2017/10/24 12:57:21 by vrybchyc         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,8 @@ NAME = ft_ls
 
 SRC = 	add_to_list.c\
 		main.c\
-		print.c
+		print.c\
+		set_width.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -25,7 +26,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@echo "\033[32;1mmake libft...\033[0m"
 	@make -C libft/
-	@echo "\033[32;1mmake \033[0m"
+	@echo "\033[32;1mmake ft_ls\033[0m"
 	@gcc $(FLAGS) -o $(NAME) -L libft/ -lft $(OBJ)
 
 .c.o:

@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 09:35:22 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/19 12:51:46 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/24 13:21:15 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static t_e	*create_new_elem(struct stat st, char *name, char *path)
 	new->name = ft_strdup(name);
 	new->path = ft_strdup(path);
 	new->next = NULL;
+	if (g_flag_l)
+		set_width(new->st);
 	return (new);
 }
 
