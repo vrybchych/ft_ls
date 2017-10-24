@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 10:47:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/24 14:02:43 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/24 16:18:00 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	ft_print(char *dir_name, t_e *el)
 	}
 	while (el)
 	{
-		print_l(el);
+		if (g_flag_l)
+			print_l(el);
 		write(1, el->name, ft_strlen(el->name));
 		write(1, "\n", 1);
 		el = el->next;
@@ -54,7 +55,6 @@ static void	ft_ls(char *dir_name, t_e *el)
 {
 	DIR				*dir_fd;
 
-
 	if (!(dir_fd = opendir(dir_name)))
 	{
 		write(1, "ft_ls:", 7);
@@ -73,15 +73,45 @@ static void	ft_ls(char *dir_name, t_e *el)
 	closedir(dir_fd);
 }
 
+static int	set_flags(char *s)
+{
+    if (s[0] != '-')
+		return (0);
+	while (*(++s))
+        if (*s == 'R')
+			g_flag_R = 1;
+		else if (*s == 't')
+            g_flag_t = 1;
+		else if (*s == 'a')
+            g_flag_a = 1;
+		else if (*s == 'l')
+            g_flag_l = 1;
+		else if (*s == 'r')
+            g_flag_r = 1;
+		else
+		{
+			write(1, "usage: .ft_ls [-latrR] [file...]\n", 33);
+			exit (0);
+		}
+	return (1);
+}
+
 int			main(int argc, char **argv)
 {
-	g_flag_l = 1;
-	g_flag_R = 1;
-	g_flag_a = 0;
+	int		i;
 
-	if (argc > 1)
-		ft_ls(argv[1], NULL);
+	i = 1;
+	if (argc == 1)
+		ft_ls(".", NULL);
 	else
-		printf("no arguments\n");//test
+	{
+		while (i < argc && set_flags(argv[i]))
+			i++;
+		if (i >= argc)
+			ft_ls(".", NULL);
+		else
+			while (i < argc)
+				ft_ls(argv[i++], NULL);
+	}
 	return (0);
 }
