@@ -6,20 +6,25 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 10:47:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/24 16:18:00 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/25 15:04:09 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
+// ADD total
+
 static void	ft_print(char *dir_name, t_e *el)
 {
-	if (ft_strcmp(".", dir_name) && g_flag_l)
+	static int		first_enter;
+
+	if (first_enter)
 	{
 		write(1, "\n", 1);
 		write(1, dir_name, ft_strlen(dir_name));
 		write(1, ":\n", 2);
 	}
+	first_enter++;
 	while (el)
 	{
 		if (g_flag_l)
@@ -50,14 +55,13 @@ static void	read_dir(DIR *dir_fd, t_e **el, char *dir_name)
     }
 }
 
-
-static void	ft_ls(char *dir_name, t_e *el)
+void		ft_ls(char *dir_name, t_e *el)
 {
 	DIR				*dir_fd;
 
 	if (!(dir_fd = opendir(dir_name)))
 	{
-		write(1, "ft_ls:", 7);
+		write(1, "ft_ls: ", 8);
         perror(dir_name);
         return ;
     }
@@ -70,6 +74,7 @@ static void	ft_ls(char *dir_name, t_e *el)
         	    ft_ls(el->path, NULL);
 			el = el->next;
 		}
+//	ft_free_el(el);//ADD!
 	closedir(dir_fd);
 }
 
@@ -109,9 +114,10 @@ int			main(int argc, char **argv)
 			i++;
 		if (i >= argc)
 			ft_ls(".", NULL);
+		else if ((i + 1) == argc)
+			ft_ls(argv[i], NULL);
 		else
-			while (i < argc)
-				ft_ls(argv[i++], NULL);
+			sort_and_check_argv(argv, i, argc);
 	}
 	return (0);
 }

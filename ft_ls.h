@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 10:45:03 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/24 13:18:13 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/25 14:21:50 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ void		print_l(t_e *el);
 void		set_width(struct stat st);
 void		print_nb_width(int nb, int width);
 void		print_str_width(char *str, int width);
+void		sort_and_check_argv(char **argv, int i, int argc);
+void		ft_ls(char *dir_name, t_e *el);
 
 #endif
