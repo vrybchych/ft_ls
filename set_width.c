@@ -6,7 +6,7 @@
 /*   By: vrybchyc <vrybchyc@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 13:39:08 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/28 14:47:13 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/28 15:26:45 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static int	nw(int nb)
 {
-	int		width;
+	int				width;
 
 	width = 1;
 	while (nb /= 10)
@@ -29,7 +29,7 @@ static int	nw(int nb)
 
 static int	sw(char *s)
 {
-	int		width;
+	int				width;
 
 	width = -1;
 	while (s[++width])
@@ -39,8 +39,8 @@ static int	sw(char *s)
 
 void		set_width(struct stat st)
 {
-	struct passwd *pw;
-	struct group *gr;
+	struct passwd	*pw;
+	struct group	*gr;
 	int				width;
 
 	pw = getpwuid(st.st_uid);
@@ -61,7 +61,7 @@ void		set_width(struct stat st)
 
 void		print_nb_width(int nb, int width)
 {
-	int 	current_width;
+	int				current_width;
 
 	current_width = nw(nb);
 	while (width > current_width++)
@@ -70,9 +70,9 @@ void		print_nb_width(int nb, int width)
 
 void		print_str_width(char *str, int width)
 {
-	int    current_width;
+	int				current_width;
 
-    current_width = sw(str);
-    while (width > current_width++)
+	current_width = sw(str);
+	while (width > current_width++)
 		write(1, " ", 1);
 }

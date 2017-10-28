@@ -6,17 +6,11 @@
 /*   By: vrybchyc <vrybchyc@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:35:01 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/25 15:03:18 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/28 15:34:33 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-typedef struct		s_lst
-{
-	char 			*s;
-	struct s_lst	*next;
-}					t_lst;
 
 static t_lst	*create_new_lst(char *s)
 {
@@ -29,14 +23,10 @@ static t_lst	*create_new_lst(char *s)
 	return (new);
 }
 
-static		void list_add(t_lst **l, char *s)
+static void		list_add(t_lst **l, char *s, t_lst *prev, t_lst *new)
 {
-	t_lst		*new;
-	t_lst		*prev;
 	t_lst		*tmp;
 
-	prev = NULL;
-	new = NULL;
 	tmp = *l;
 	if (!(*l))
 		*l = create_new_lst(s);
@@ -57,21 +47,20 @@ static		void list_add(t_lst **l, char *s)
 			prev = tmp;
 			tmp = tmp->next;
 		}
-		prev->next = create_new_lst(s);;
+		prev->next = create_new_lst(s);
 	}
 }
 
-static	void		check_errors(t_lst **l)
+static void		check_errors(t_lst **l)
 {
-	t_lst 		*begin;
+	t_lst		*begin;
 	t_lst		*prev;
 	t_lst		*tmp;
-	DIR         *dir_fd;
+	DIR			*dir_fd;
 
 	begin = *l;
 	prev = NULL;
 	while (begin)
-	{
 		if (!(dir_fd = opendir(begin->s)))
 		{
 			write(1, "ft_ls: ", 8);
@@ -89,18 +78,16 @@ static	void		check_errors(t_lst **l)
 			prev = begin;
 			begin = begin->next;
 		}
-	}
 }
 
-
-void		sort_and_check_argv(char **argv, int i, int argc)
+void			sort_and_check_argv(char **argv, int i, int argc)
 {
 	t_lst		*l;
 	t_lst		*begin;
 
 	l = NULL;
 	while (i < argc)
-		list_add(&l, argv[i++]);
+		list_add(&l, argv[i++], NULL, NULL);
 	check_errors(&l);
 	begin = l;
 	write(1, l->s, ft_strlen(l->s));
