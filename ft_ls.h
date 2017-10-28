@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 10:45:03 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/25 14:21:50 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/28 14:42:17 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int					g_link_w;
 int					g_uname_w;
 int					g_gname_w;
 int					g_size_w;
+int					g_minor_w;
 int					g_flag_R;
 int					g_flag_t;
 int					g_flag_a;
@@ -51,5 +52,8 @@ void		print_nb_width(int nb, int width);
 void		print_str_width(char *str, int width);
 void		sort_and_check_argv(char **argv, int i, int argc);
 void		ft_ls(char *dir_name, t_e *el);
+void		free_el(t_e *el);
+void		print_total(t_e *el);
+void		print_link(t_e *el);
 
 #endif

@@ -6,15 +6,17 @@
 #    By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/14 10:36:49 by vrybchyc          #+#    #+#              #
-#    Updated: 2017/10/25 13:49:44 by vrybchyc         ###   ########.fr        #
+#    Updated: 2017/10/28 13:58:51 by vrybchyc         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = ft_ls
 
 SRC = 	add_to_list.c\
+		free_el.c\
 		main.c\
 		print.c\
+		print_total_and_link.c\
 		set_width.c\
 		sort_and_check_argv.c
 

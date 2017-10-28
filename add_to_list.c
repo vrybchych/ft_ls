@@ -6,8 +6,9 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/16 09:35:22 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/24 13:21:15 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/27 19:30:08 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
+
 /* ************************************************************************** */
 
 #include "ft_ls.h"
@@ -30,6 +31,20 @@ static t_e	*create_new_elem(struct stat st, char *name, char *path)
 	return (new);
 }
 
+static int	ft_cmp(t_e *el, struct stat st, char *name)
+{
+//	g_flag_f
+	int		res;
+
+	res = 0;
+	if (g_flag_t)
+		res = st.st_mtimespec.tv_sec - el->st.st_mtimespec.tv_sec;
+	else
+		res = ft_strcmp(el->name, name);
+	return (g_flag_r ? -res : res);
+}
+
+
 void		add_to_list(t_e **el, struct stat st, char *name, char *path)
 {
 	t_e		*tmp;
@@ -43,7 +58,7 @@ void		add_to_list(t_e **el, struct stat st, char *name, char *path)
 	{		
 		while (tmp)
 		{
-			if (ft_strcmp(tmp->name, name) > 0)
+			if (ft_cmp(tmp, st, name) > 0)
 			{
 				new = create_new_elem(st, name, path);
 				new->next = tmp;
