@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 17:21:47 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/28 15:18:56 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/28 16:56:55 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void		print_size(t_e *el)
 {
-	if (S_ISCHR(el->st.st_mode))
+	if (S_ISCHR(el->st.st_mode) || S_ISBLK(el->st.st_mode))
 	{
 		print_nb_width(major(el->st.st_rdev), (g_size_w - g_minor_w - 2));
 		ft_putnbr(major(el->st.st_rdev));
@@ -39,10 +39,10 @@ static void		print_part2(t_e *el)
 	gr = getgrgid(el->st.st_gid);
 	write(1, pw->pw_name, ft_strlen(pw->pw_name));
 	print_str_width(pw->pw_name, g_uname_w);
-	write(1, " ", 1);
+	write(1, "  ", 2);
 	write(1, gr->gr_name, ft_strlen(gr->gr_name));
 	print_str_width(gr->gr_name, g_gname_w);
-	write(1, " ", 1);
+	write(1, "  ", 2);
 	print_size(el);
 	write(1, ctime(&(el->st.st_mtimespec.tv_sec)) + 4, 7);
 	if ((time(0) - el->st.st_mtimespec.tv_sec) < 15811200)
@@ -70,7 +70,7 @@ static void		print_part1(nlink_t n, mode_t m)
 	write(1, (m & S_IROTH) ? "r" : "-", 1);
 	write(1, (m & S_IWOTH) ? "w" : "-", 1);
 	write(1, (m & S_IXOTH) ? "x" : "-", 1);
-	write(1, " ", 1);
+	write(1, "  ", 2);
 	print_nb_width(n, g_link_w);
 	ft_putnbr(n);
 	write(1, " ", 1);
